@@ -30,7 +30,7 @@ MASTER_DNS=$(fetch_cluster_master_public_dns ${CLUSTER_NAME})
 for dns in ${PUBLIC_DNS};
 do
   #cmd='/usr/local/redis/src/redis-server /usr/local/redis/redis.conf &'
-  cmd='/usr/local/redis/src/redis-server --daemonize yes /usr/local/redis/redis.conf &'
+  cmd='/usr/local/redis/src/redis-server /usr/local/redis/redis.conf --daemonize yes &'
   run_cmd_on_node ${dns} ${cmd} &
 done
 
