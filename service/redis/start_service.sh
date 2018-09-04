@@ -29,7 +29,8 @@ MASTER_DNS=$(fetch_cluster_master_public_dns ${CLUSTER_NAME})
 # Start redis servers
 for dns in ${PUBLIC_DNS};
 do
-  cmd='/usr/local/redis/src/redis-server /usr/local/redis/redis.conf &'
+  #cmd='/usr/local/redis/src/redis-server /usr/local/redis/redis.conf &'
+  cmd='/usr/local/redis/src/redis-server --daemonize yes /usr/local/redis/redis.conf &'
   run_cmd_on_node ${dns} ${cmd} &
 done
 
@@ -38,7 +39,8 @@ wait
 # begin discovery of redis servers
 sleep 5
 
-script=${PEG_ROOT}/config/redis/join_redis_cluster.sh
+#script=${PEG_ROOT}/config/redis/join_redis_cluster.sh
+script=${PEG_ROOT}/service/redis/join_redis_cluster.sh
 args="${PUBLIC_DNS}"
 run_script_on_node ${MASTER_DNS} ${script} ${args} &
 
