@@ -25,7 +25,7 @@ CLUSTER_NAME=$1
 
 PUBLIC_DNS=$(fetch_cluster_public_dns ${CLUSTER_NAME})
 
-cmd='sudo /usr/local/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties &'
+cmd='sudo /usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties &'
 # Start kafka broker on all nodes
 for dns in ${PUBLIC_DNS}; do
   echo $dns
